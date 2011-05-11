@@ -8,28 +8,36 @@ def update_quality(items)
 			break
 		end
 	
-    if item.name == AgedBrie or item.name == BackStage
-        item.quality += 1
-				if item.name == BackStage and item.sell_in < 11
-          item.quality += 1
-					if item.sell_in < 6
-						item.quality += 1
-					end
-      end
+		item.sell_in -= 1
+	
+    if item.name == AgedBrie
+				if item.sell_in < 0
+					item.quality += 2
+				else
+					item.quality += 1
+				end
+		elsif item.name == BackStage
+				if item.sell_in < 5
+					item.quality += 3
+				elsif item.sell_in < 10
+          item.quality += 2
+      	else
+					item.quality += 1
+				end
     else
       item.quality -= 1
     end
 
-    item.sell_in -= 1
+    
 
     if item.sell_in < 0
 	
       if item.name == AgedBrie
-				item.quality +=1
-			elsif item.name != BackStage
-          item.quality -= 1
+				
+			elsif item.name == BackStage
+          item.quality = 0
       else
-        item.quality = 0
+        item.quality -= 1
       end
 
     end
@@ -39,6 +47,7 @@ def update_quality(items)
 		elsif item.quality < 0
       item.quality = 0
 		end
+		
   end
 end
 

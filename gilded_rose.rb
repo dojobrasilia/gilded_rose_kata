@@ -1,47 +1,50 @@
+AgedBrie = 'Aged Brie'
+BackStage = 'Backstage passes to a TAFKAL80ETC concert'
+Sulfuras = 'Sulfuras, Hand of Ragnaros'
+
 def update_quality(items)
   items.each do |item|
-    if item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert'
+		if item.name == Sulfuras
+			break
+		end
+	
+    if item.name != AgedBrie && item.name != BackStage
       if item.quality > 0
-        if item.name != 'Sulfuras, Hand of Ragnaros'
           item.quality -= 1
-        end
       end
+
     else
       if item.quality < 50
         item.quality += 1
-        if item.name == 'Backstage passes to a TAFKAL80ETC concert'
-          if item.sell_in < 11
-            if item.quality < 50
-              item.quality += 1
-            end
-          end
-          if item.sell_in < 6
-            if item.quality < 50
-              item.quality += 1
-            end
-          end
-        end
+        
+				if item.name == BackStage and item.sell_in < 11
+            item.quality += 1
+						if item.sell_in < 6
+							item.quality += 1
+						end
+				end
+				
       end
     end
-    if item.name != 'Sulfuras, Hand of Ragnaros'
-      item.sell_in -= 1
-    end
+
+    item.sell_in -= 1
+
     if item.sell_in < 0
-      if item.name != "Aged Brie"
-        if item.name != 'Backstage passes to a TAFKAL80ETC concert'
-          if item.quality > 0
-            if item.name != 'Sulfuras, Hand of Ragnaros'
-              item.quality -= 1
-            end
-          end
+	
+      if item.name == AgedBrie
+				if item.quality<50
+					item.quality +=1
+				end
+			else
+        if item.name != BackStage and item.quality > 0
+          item.quality -= 1
         else
-          item.quality = item.quality - item.quality
+          item.quality = 0
         end
-      else
-        if item.quality < 50
-          item.quality += 1
-        end
+			
+     
       end
+
     end
   end
 end

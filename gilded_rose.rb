@@ -8,23 +8,16 @@ def update_quality(items)
 			break
 		end
 	
-    if item.name != AgedBrie && item.name != BackStage
-      if item.quality > 0
-          item.quality -= 1
-      end
-
-    else
-      if item.quality < 50
+    if item.name == AgedBrie or item.name == BackStage
         item.quality += 1
-        
 				if item.name == BackStage and item.sell_in < 11
-            item.quality += 1
-						if item.sell_in < 6
-							item.quality += 1
-						end
-				end
-				
+          item.quality += 1
+					if item.sell_in < 6
+						item.quality += 1
+					end
       end
+    else
+      item.quality -= 1
     end
 
     item.sell_in -= 1
@@ -32,20 +25,20 @@ def update_quality(items)
     if item.sell_in < 0
 	
       if item.name == AgedBrie
-				if item.quality<50
-					item.quality +=1
-				end
-			else
-        if item.name != BackStage and item.quality > 0
+				item.quality +=1
+			elsif item.name != BackStage
           item.quality -= 1
-        else
-          item.quality = 0
-        end
-			
-     
+      else
+        item.quality = 0
       end
 
     end
+
+		if item.quality > 50
+			item.quality = 50
+		elsif item.quality < 0
+      item.quality = 0
+		end
   end
 end
 
@@ -63,4 +56,3 @@ Item = Struct.new(:name, :sell_in, :quality)
 #   Item.new("Backstage passes to a TAFKAL80ETC concert", 15, 20),
 #   Item.new("Conjured Mana Cake", 3, 6),
 # ]
-

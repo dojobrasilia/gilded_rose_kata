@@ -1,6 +1,7 @@
 AgedBrie = 'Aged Brie'
 BackStage = 'Backstage passes to a TAFKAL80ETC concert'
 Sulfuras = 'Sulfuras, Hand of Ragnaros'
+Conjured = 'Conjured Mana Cake'
 
 def update_quality(items)
   items.each do |item|
@@ -12,7 +13,7 @@ def update_quality(items)
 		update_aged_brie(item)
 	elsif item.name == BackStage
 	    update_backstage(item)
-    elsif item.name == "Conjured Mana Cake"
+    elsif item.name == Conjured
         update_conjured(item)
     else
         update_normal_item(item)

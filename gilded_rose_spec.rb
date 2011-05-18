@@ -211,6 +211,7 @@ describe "#update_quality" do
     Given(:items) {
       [
         Item.new("NORMAL ITEM", 5, 10),
+        Item.new("Sulfuras, Hand of Ragnaros", 3, 10),
         Item.new("Aged Brie", 3, 10),
       ]
     }
@@ -220,7 +221,10 @@ describe "#update_quality" do
     Then { items[0].quality.should == 9 }
     Then { items[0].sell_in.should == 4 }
 
-    Then { items[1].quality.should == 11 }
-    Then { items[1].sell_in.should == 2 }
+    Then { items[1].quality.should == 10 }
+    Then { items[1].sell_in.should == 3 }
+    
+    Then { items[2].quality.should == 11 }
+    Then { items[2].sell_in.should == 2 }
   end
 end

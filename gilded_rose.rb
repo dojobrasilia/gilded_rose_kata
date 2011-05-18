@@ -4,9 +4,7 @@ Sulfuras = 'Sulfuras, Hand of Ragnaros'
 
 def update_quality(items)
   items.each do |item|
-	if item.name == Sulfuras
-		break
-	end
+	next if item.name == Sulfuras
 
 	item.sell_in -= 1
 	

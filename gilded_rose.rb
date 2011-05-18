@@ -4,49 +4,49 @@ Sulfuras = 'Sulfuras, Hand of Ragnaros'
 
 def update_quality(items)
   items.each do |item|
-		if item.name == Sulfuras
-			break
-		end
-	
-		item.sell_in -= 1
+	if item.name == Sulfuras
+		break
+	end
+
+	item.sell_in -= 1
 	
     if item.name == AgedBrie
-				if item.sell_in < 0
-					item.quality += 2
-				else
-					item.quality += 1
-				end
-		elsif item.name == BackStage
-				if item.sell_in < 5
-					item.quality += 3
-				elsif item.sell_in < 10
-          item.quality += 2
+		if item.sell_in < 0
+			item.quality += 2
+		else
+			item.quality += 1
+		end
+
+	elsif item.name == BackStage
+	    if item.sell_in < 0
+		    item.quality = 0
+		elsif item.sell_in < 5
+			item.quality += 3
+		elsif item.sell_in < 10
+            item.quality += 2
       	else
-					item.quality += 1
-				end
+			item.quality += 1
+		end
+		    
     else
-      item.quality -= 1
+        item.quality -= 1
     end
 
     
 
     if item.sell_in < 0
 	
-      if item.name == AgedBrie
-				
-			elsif item.name == BackStage
-          item.quality = 0
-      else
-        item.quality -= 1
-      end
+        if item.name != AgedBrie and item.name!= BackStage
+            item.quality -= 1
+        end
 
     end
 
-		if item.quality > 50
-			item.quality = 50
-		elsif item.quality < 0
-      item.quality = 0
-		end
+	if item.quality > 50
+		item.quality = 50
+	elsif item.quality < 0
+        item.quality = 0
+	end
 		
   end
 end

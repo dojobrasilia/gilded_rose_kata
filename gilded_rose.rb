@@ -9,38 +9,52 @@ def update_quality(items)
 	item.sell_in -= 1
 	
     if item.name == AgedBrie
-		if item.sell_in < 0
-			item.quality += 2
-		else
-			item.quality += 1
-		end
-
+		update_aged_brie(item)
 	elsif item.name == BackStage
-	    if item.sell_in < 0
-		    item.quality = 0
-		elsif item.sell_in < 5
-			item.quality += 3
-		elsif item.sell_in < 10
-            item.quality += 2
-      	else
-			item.quality += 1
-		end
-		    
+	    update_backstage(item)
     else
-        if item.sell_in < 0
-            item.quality -= 2
-        else
-            item.quality -= 1
-        end
+        update_normal_item(item)
     end
 
-	if item.quality > 50
+	enforce_limits(item)
+		
+  end
+end
+
+def update_aged_brie(item)
+    if item.sell_in < 0
+		item.quality += 2
+	else
+		item.quality += 1
+	end
+end
+
+def update_backstage(item)
+    if item.sell_in < 0
+	    item.quality = 0
+	elsif item.sell_in < 5
+		item.quality += 3
+	elsif item.sell_in < 10
+        item.quality += 2
+  	else
+		item.quality += 1
+	end
+end
+
+def update_normal_item(item)
+    if item.sell_in < 0
+        item.quality -= 2
+    else
+        item.quality -= 1
+    end
+end
+
+def enforce_limits(item)
+    if item.quality > 50
 		item.quality = 50
 	elsif item.quality < 0
         item.quality = 0
 	end
-		
-  end
 end
 
 # DO NOT CHANGE THINGS BELOW -----------------------------------------

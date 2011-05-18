@@ -29,17 +29,11 @@ def update_quality(items)
 		end
 		    
     else
-        item.quality -= 1
-    end
-
-    
-
-    if item.sell_in < 0
-	
-        if item.name != AgedBrie and item.name!= BackStage
+        if item.sell_in < 0
+            item.quality -= 2
+        else
             item.quality -= 1
         end
-
     end
 
 	if item.quality > 50

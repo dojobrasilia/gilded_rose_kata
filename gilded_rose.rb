@@ -12,6 +12,8 @@ def update_quality(items)
 		update_aged_brie(item)
 	elsif item.name == BackStage
 	    update_backstage(item)
+    elsif item.name == "Conjured Mana Cake"
+        update_conjured(item)
     else
         update_normal_item(item)
     end
@@ -46,6 +48,14 @@ def update_normal_item(item)
         item.quality -= 2
     else
         item.quality -= 1
+    end
+end
+
+def update_conjured(item)
+    if item.sell_in < 0
+        item.quality -= 4
+    else
+        item.quality -= 2
     end
 end
 
